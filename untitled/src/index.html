@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Valentine 💘</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 80px 20px 120px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #ffdde1;
+  overflow-x: hidden;
+}
+
+/* Judul */
+h1 {
+  color: #ff3366;
+  font-size: 28px;
+}
+
+/* Tombol */
+.buttons {
+  margin-top: 40px;
+  position: relative;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yesBtn {
+  background: #ff3366;
+  color: white;
+}
+
+#noBtn {
+  background: #666;
+  color: white;
+  position: absolute;
+}
+
+/* Running text */
+.running-text {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #ff4d79;
+  color: white;
+  white-space: nowrap;
+}
+
+.running-text span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* Hati jatuh */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: #ff3366;
+  font-size: 20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Mau jadi Valentine aku nggak? 💖🥺</h1>
+
+<div class="buttons">
+  <button id="yesBtn" onclick="yesClicked()">Yes 😍</button>
+  <button id="noBtn">No 😜</button>
+</div>
+
+<div class="running-text">
+  <span>💘 Kamu spesial banget buat aku 💘 Happy Valentine! 💘</span>
+</div>
+
+<script>
+/* Tombol NO kabur */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 200);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+/* Hati jatuh */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(createHeart, 300);
+
+/* Klik YES */
+function yesClicked() {
+  document.body.innerHTML = `
+    <h1 style="margin-top:100px;color:#ff3366;">
+      YEAYYY 💕<br>Date kita resmi! 😆💘
+    </h1>
+
+    <div class="running-text">
+      <span>💖 Kamu sekarang resmi jadi Valentine aku! 💖</span>
+    </div>
+  `;
+
+  confetti();
+}
+
+/* Confetti sederhana */
+function confetti() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.style.position = "fixed";
+    c.style.width = "8px";
+    c.style.height = "8px";
+    c.style.background =
+      "hsl(" + Math.random() * 360 + ",100%,50%)";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "-10px";
+    c.style.opacity = 0.8;
+    c.style.transition = "transform 2s linear";
+
+    document.body.appendChild(c);
+
+    setTimeout(() => {
+      c.style.transform =
+        "translateY(100vh) rotate(720deg)";
+    }, 10);
+
+    setTimeout(() => c.remove(), 2000);
+  }
+}
+</script>
+
+</body>
+</html>
